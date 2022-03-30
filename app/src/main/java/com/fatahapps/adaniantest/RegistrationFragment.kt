@@ -59,7 +59,10 @@ class RegistrationFragment : Fragment() {
             lifecycleScope.launchWhenStarted {
                 postUserRegistrationVM.postUserRegistration(user)
                     .catch {e ->
-                        Snackbar.make(view, e.localizedMessage+"", Snackbar.LENGTH_SHORT).show()
+                        e.message?.let { it1 ->
+                            Snackbar.make(view,
+                                it1, Snackbar.LENGTH_SHORT).show()
+                        }
                     }.collect { result ->
                         when(result) {
                             is Resource.Success -> {

@@ -2,9 +2,7 @@ package com.fatahapps.data.remote
 
 import com.fatahapps.data.remote.dto.UserDTO
 import com.fatahapps.data.remote.dto.UserSuccessDTO
-import retrofit2.http.Body
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface EcobbaApi {
 
@@ -17,10 +15,11 @@ interface EcobbaApi {
         @Body user: UserDTO
     ): UserSuccessDTO
 
+    @FormUrlEncoded
     @POST("login")
     suspend fun postUserSignIn(
-        @Query("email") email: String,
-        @Query("password") password: String
-    )
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): UserSuccessDTO
 
 }

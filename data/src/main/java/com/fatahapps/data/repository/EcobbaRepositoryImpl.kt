@@ -41,6 +41,21 @@ class EcobbaRepositoryImpl @Inject constructor(
         email: String,
         password: String
     ): Flow<Resource<UserSuccessEntity>> = flow {
-        TODO("Not yet implemented")
+        emit(Resource.Loading())
+
+        try {
+            val remoteData = api.postUserSignIn(email, password)
+            emit(Resource.Success(userSuccessMapper.from(remoteData)))
+        } catch (e: HttpException) {
+            emit(Resource.Error(
+                message = "Oops, something went wrong",
+                data = null
+            ))
+        } catch (e: IOException) {
+            emit(Resource.Error(
+                message = "Couldn't reach server check your internet connection",
+                data = null
+            ))
+        }
     }
 }

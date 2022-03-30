@@ -17,12 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class PostUserRegistrationVM @Inject constructor(
     private val postUserRegistrationTask: PostUserRegistrationTask,
-    private val userMapper: Mapper<UserEntity, User>,
-    private val userSuccessMapper: Mapper<UserSuccessEntity, UserSuccess>
+    private val userMapper: Mapper<UserEntity, User>
 ): ViewModel(){
-
-    private val _state = MutableStateFlow(PostUserRegistrationState())
-    val state: StateFlow<PostUserRegistrationState> = _state.asStateFlow()
 
     fun postUserRegistration(
         user: User
