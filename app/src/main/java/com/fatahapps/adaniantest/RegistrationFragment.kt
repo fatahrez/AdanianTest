@@ -1,17 +1,23 @@
 package com.fatahapps.adaniantest
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.fatahapps.adaniantest.databinding.FragmentRegistrationBinding
 import com.fatahapps.domain.entities.Resource
 import com.fatahapps.presentation.model.User
 import com.fatahapps.presentation.viewmodels.registration.PostUserRegistrationVM
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RegistrationFragment : Fragment() {
@@ -32,8 +38,8 @@ class RegistrationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
+        _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
         val view = binding.root
 
         binding.signInTextView.setOnClickListener {
@@ -50,12 +56,26 @@ class RegistrationFragment : Fragment() {
 
             val user = User(name, otherName, email, password, passwordConfirmation, msisdnText)
 
-            postUserRegistrationVM.postUserRegistration(user)
-
-            Navigation.findNavController(view).navigate(R.id.action_registrationFragment_to_loginFragment)
-//            if (postUserRegistrationVM.state.value.isLoading) {
-//
-//            }
+            lifecycleScope.launchWhenStarted {
+                postUserRegistrationVM.postUserRegistration(user)
+                    .catch {e ->
+                        Snackbar.make(view, e.localizedMessage+"", Snackbar.LENGTH_SHORT).show()
+                    }.collect { result ->
+                        when(result) {
+                            is Resource.Success -> {
+                                binding.progressBar.visibility = View.GONE
+                                Navigation.findNavController(view).navigate(R.id.action_registrationFragment_to_loginFragment)
+                            }
+                            is Resource.Loading -> {
+                                binding.progressBar.visibility = View.VISIBLE
+                            }
+                            is Resource.Error -> {
+                                binding.progressBar.visibility = View.GONE
+                                Snackbar.make(view, result.data?.errors?.get(0).toString(), Snackbar.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+            }
         }
 
         return view
@@ -67,6 +87,6 @@ class RegistrationFragment : Fragment() {
     }
 
     companion object {
-
+        private const val TAG = "RegistrationFragment"
     }
 }
