@@ -1,0 +1,46 @@
+package com.fatahapps.data.repository
+
+import com.fatahapps.data.mappers.Mapper
+import com.fatahapps.data.remote.EcobbaApi
+import com.fatahapps.data.remote.dto.UserDTO
+import com.fatahapps.data.remote.dto.UserSuccessDTO
+import com.fatahapps.domain.entities.Resource
+import com.fatahapps.domain.entities.UserEntity
+import com.fatahapps.domain.entities.UserSuccessEntity
+import com.fatahapps.domain.repository.EcobbaRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
+import java.io.IOException
+import javax.inject.Inject
+
+class EcobbaRepositoryImpl @Inject constructor(
+    private val api: EcobbaApi,
+    private val userMapper: Mapper<UserEntity, UserDTO>,
+    private val userSuccessMapper: Mapper<UserSuccessEntity, UserSuccessDTO>
+): EcobbaRepository {
+    override fun postUserRegistration(user: UserEntity): Flow<Resource<UserSuccessEntity>> = flow{
+        emit(Resource.Loading())
+        try {
+            val remoteData = api.postUserRegistration(userMapper.to(user))
+            emit(Resource.Success(userSuccessMapper.from(remoteData)))
+        } catch (e: HttpException) {
+            emit(Resource.Error(
+                message = "Oops, something went wrong",
+                data = null
+            ))
+        } catch (e: IOException) {
+            emit(Resource.Error(
+                message = "Couldn't reach server check your internet connection",
+                data = null
+            ))
+        }
+    }
+
+    override fun postUserSignIn(
+        email: String,
+        password: String
+    ): Flow<Resource<UserSuccessEntity>> = flow {
+        TODO("Not yet implemented")
+    }
+}
