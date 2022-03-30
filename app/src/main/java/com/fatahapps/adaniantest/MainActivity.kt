@@ -10,13 +10,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val postUserRegistrationVM: PostUserRegistrationVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val user: User = User("user83", "user83", "user83@email.com", "userpass", "userpass", "0987654326")
-        postUserRegistrationVM.postUserRegistration(user)
     }
 }
