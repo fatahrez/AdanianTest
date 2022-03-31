@@ -1,8 +1,8 @@
 package com.fatahapps.presentation.viewmodels.kweas
 
-import com.fatahapps.domain.entities.KweaModels.KweaItemEntity
+import com.fatahapps.presentation.model.kweaModels.KweaItem
 
 data class GetKweaItemsState (
-    val items: List<KweaItemEntity>? = null,
+    val items: List<KweaItem>? = null,
     val isLoading: Boolean = false
 )
