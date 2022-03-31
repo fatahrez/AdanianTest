@@ -1,10 +1,8 @@
-package com.fatahapps.adaniantest
+package com.fatahapps.adaniantest.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import com.fatahapps.presentation.model.User
-import com.fatahapps.presentation.viewmodels.registration.PostUserRegistrationVM
+import com.fatahapps.adaniantest.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

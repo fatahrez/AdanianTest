@@ -1,14 +1,16 @@
 package com.fatahapps.data.remote.dto.kweaModels
 
+import com.google.gson.annotations.SerializedName
+
 data class KweaItemDTO(
-    val createdAt: String?,
-    val id: Int,
-    val imageDTOS: List<ImageDTO>?,
-    val itemCategory: String?,
-    val itemCurrency: String?,
-    val itemDescription: String?,
-    val itemName: String?,
-    val itemPrice: Int?,
-    val shopDTO: ShopDTO?,
-    val updatedAt: String?
+    @SerializedName("created_at") val createdAt: String?,
+    @SerializedName("id") val id: Int,
+    @SerializedName("images") val imageDTOS: List<ImageDTO>?,
+    @SerializedName("item_category") val itemCategory: String?,
+    @SerializedName("item_currency") val itemCurrency: String?,
+    @SerializedName("item_description") val itemDescription: String?,
+    @SerializedName("item_name") val itemName: String?,
+    @SerializedName("item_price") val itemPrice: Int?,
+    @SerializedName("shop") val shopDTO: ShopDTO?,
+    @SerializedName("updated_at") val updatedAt: String?
 )

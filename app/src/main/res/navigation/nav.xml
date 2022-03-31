@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.fatahapps.adaniantest.RegistrationFragment"
+        android:name="com.fatahapps.adaniantest.ui.auth.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.fatahapps.adaniantest.LoginFragment"
+        android:name="com.fatahapps.adaniantest.ui.auth.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.fatahapps.adaniantest.HomeFragment"
+        android:name="com.fatahapps.adaniantest.ui.kweas.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action

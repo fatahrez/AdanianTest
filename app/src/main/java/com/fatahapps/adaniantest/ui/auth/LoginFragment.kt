@@ -1,4 +1,4 @@
-package com.fatahapps.adaniantest
+package com.fatahapps.adaniantest.ui.auth
 
 import android.os.Bundle
 import androidx.preference.PreferenceManager
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import com.fatahapps.adaniantest.R
 import com.fatahapps.adaniantest.databinding.FragmentLoginBinding
 import com.fatahapps.domain.entities.Resource
 import com.fatahapps.presentation.viewmodels.SignIn.PostSignInVM
