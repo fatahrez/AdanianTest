@@ -12,4 +12,5 @@ class PostUserRegistrationTask @Inject constructor(
 ) {
     operator fun invoke(user: UserEntity): Flow<Resource<UserSuccessEntity>> {
         return repository.postUserRegistration(user)
+    }
 }
