@@ -5,8 +5,9 @@ import com.fatahapps.domain.entities.UserSuccessEntity
 import com.fatahapps.domain.repository.EcobbaRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class PostUserSignInTask(
+class PostUserSignInTask @Inject constructor(
     private val repository: EcobbaRepository
 ) {
     operator fun invoke(email: String, password: String): Flow<Resource<UserSuccessEntity>> {

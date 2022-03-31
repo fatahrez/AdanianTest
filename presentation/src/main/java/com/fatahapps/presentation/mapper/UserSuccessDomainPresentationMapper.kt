@@ -9,9 +9,9 @@ import javax.inject.Inject
 class UserSuccessDomainPresentationMapper @Inject constructor(): Mapper<UserSuccessEntity, UserSuccess> {
     override fun from(e: UserSuccess): UserSuccessEntity {
         return UserSuccessEntity(
-            success = e.success,
-            message = e.message,
-            user = UserEntity(
+            e.success,
+            e.message,
+            UserEntity(
                 e.user.name,
                 e.user.otherName,
                 e.user.email,
@@ -19,15 +19,16 @@ class UserSuccessDomainPresentationMapper @Inject constructor(): Mapper<UserSucc
                 e.user.passwordConfirmation,
                 e.user.msisdn
             ),
-            token = e.token
+            e.token,
+            e.errors
         )
     }
 
     override fun to(t: UserSuccessEntity): UserSuccess {
         return UserSuccess(
-            success = t.success,
-            message = t.message,
-            user = User(
+            t.success,
+            t.message,
+            User(
                 t.user.name,
                 t.user.otherName,
                 t.user.email,
@@ -35,7 +36,9 @@ class UserSuccessDomainPresentationMapper @Inject constructor(): Mapper<UserSucc
                 t.user.passwordConfirmation,
                 t.user.msisdn
             ),
-            token = t.token
+            t.token,
+            t.errors
         )
     }
+
 }
