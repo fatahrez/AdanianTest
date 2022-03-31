@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
             .getString(LoginFragment.TOKEN, null)
 
         if (token == null) {
-            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_loginFragment)
+//            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_loginFragment)
         } else {
             lifecycleScope.launchWhenCreated {
                 getKweaItemsVM.showKweas("Bearer $token")

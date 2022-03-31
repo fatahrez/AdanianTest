@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.preference.PreferenceManager
 import com.fatahapps.adaniantest.R
 import com.fatahapps.adaniantest.databinding.FragmentRegistrationBinding
 import com.fatahapps.domain.entities.Resource
@@ -39,6 +40,13 @@ class RegistrationFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        val token = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            .getString(LoginFragment.TOKEN, null)
+
+//        if (token != null) {
+//            Navigation.findNavController(view).navigate(R.id.action_registrationFragment_to_homeFragment)
+//        }
 
         binding.signInTextView.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_registrationFragment_to_loginFragment)

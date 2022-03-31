@@ -39,6 +39,13 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        val token = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            .getString(TOKEN, null)
+
+//        if (token != null) {
+//            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_homeFragment)
+//        }
+
         binding.signUpTextView.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registrationFragment)
         }
