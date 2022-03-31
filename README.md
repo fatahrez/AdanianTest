@@ -67,7 +67,7 @@ This App uses Clean Architecture to ensure:
 - Helps UI layer to be driven from data layer
 
 ## Screenshots
-<img src="https://raw.githubusercontent.com/fatahrez/AdanianTest/master/screenshots/Screenshot_20220331_191934.png?token=GHSAT0AAAAAABRU576XZSS2RZEYNIKANSYUYSF23LA" width="300"/>.<img src="https://raw.githubusercontent.com/fatahrez/AdanianTest/master/screenshots/Screenshot_20220331_191939.png?token=GHSAT0AAAAAABRU576X5VFTH24C6HS3MJA6YSF244Q" width="300"/>.<img src="https://raw.githubusercontent.com/fatahrez/AdanianTest/master/screenshots/Screenshot_20220331_191943.png?token=GHSAT0AAAAAABRU576X4X5WRZXHAVGJJU4GYSF25EQ" width="300"/>.<img src="https://raw.githubusercontent.com/fatahrez/AdanianTest/master/screenshots/Screenshot_20220331_193701.png?token=GHSAT0AAAAAABRU576WOJ6N3HKOEFYI375AYSF3PXQ" width="300"/>
+<img src="https://raw.githubusercontent.com/fatahrez/AdanianTest/master/screenshots/Screenshot_20220331_191934.png?token=GHSAT0AAAAAABRU576XEVE4CLUDUYJJMA6WYSF3TNQ" width="300"/>.<img src="https://raw.githubusercontent.com/fatahrez/AdanianTest/master/screenshots/Screenshot_20220331_191939.png?token=GHSAT0AAAAAABRU576XPPPSNNUMQC7P4SEKYSF3UBA" width="300"/>.<img src="https://raw.githubusercontent.com/fatahrez/AdanianTest/master/screenshots/Screenshot_20220331_191943.png?token=GHSAT0AAAAAABRU576XL2DJLJXOHY2V73FCYSF3UYQ" width="300"/>.<img src="https://raw.githubusercontent.com/fatahrez/AdanianTest/master/screenshots/Screenshot_20220331_193701.png?token=GHSAT0AAAAAABRU576WOJ6N3HKOEFYI375AYSF3PXQ" width="300"/>
 
 ## How to Setup
 
