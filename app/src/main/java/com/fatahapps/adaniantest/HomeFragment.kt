@@ -5,28 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import com.fatahapps.adaniantest.databinding.FragmentHomeBinding
+import com.fatahapps.presentation.viewmodels.kweas.GetKweaItemsState
+import com.fatahapps.presentation.viewmodels.kweas.GetKweaItemsVM
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private val getKweaItemsVM: GetKweaItemsVM by viewModels()
+
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -34,26 +29,19 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val view = binding.root
+        val token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NTAyMTU5My05NzBjLTQzYmYtOTVjMC1lMzg4YTI1OGNkNzAiLCJqdGkiOiI3ZmMwMTA0ZDBkMTg1YzEzZmZiMzdmNTYwZDVkZDEwNDVhZmZmNDM4MmUyOGFlYTNiNTkyMDYyYWJhOThhNTAyOTQxZTM2MDNjZmMzNzZjOSIsImlhdCI6MTY0ODY2NzA0NCwibmJmIjoxNjQ4NjY3MDQ0LCJleHAiOjE2ODAyMDMwNDQsInN1YiI6IjkiLCJzY29wZXMiOltdfQ.jdhjiSR_MtT5Rv152ceqa9QOjvQduMJVtqdN4K3gIcZhLiD7wu1s0EBneFwgb1jXjd2B3IlQ21JSR4nvt7zoDAk9IjrWnKdRHQfZUI3rB2iGtHNbNxcbtF0ZZJ5iAhhPAb8AhGfz2EG_rw8I2sMvin2cTipXG4J1gJcg2l_vMxYMlPHs0kiLjA9Dx2wyQAnl0QrEUuwBHCvUoJlH1BSHKqeFcqgvugfyaU4du1MJmVybsA1euccGihYl75GkP4pREY5K-HveBbYc-OwfCqqMFIJI5snFXipNbgt6vPsGYLCIqKMv9K_vCPBgoMU3AxYyU602GZecgQI_KBGFvn7yll-Z51x_eW0u4v3_JJVXI4BX6j2IBpvF5lMburwmBlFxgiq_8Rhg8yQ3ruILOdZk2QglfHm1i-Ytdh3QM3M3j-bUky8SiVoeK8FFhlYrpT1WuMU_DyeSxwcy9eHuKlPUVB_gGFYoQLdZgdHv0CW5qojpHs3HzyDqPhBnjIYt2GU_8eufmgNEowjkyhQa-3MY8K7FeUuqOERldccw_ZoGb10OWOsWJLsURgeA7C2JodJEzl0uT0kJxCrrGrM4b8nLS7xPNUM6JOw98GW7E1q69JIjMdMyX5OUHi4RC_rvfTVRn484OrdpDriPIw8fvP27j5gObsksiDsYUUCRt5O2F8A"
+
+        getKweaItemsVM.showKweas(token)
+
+        return view
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

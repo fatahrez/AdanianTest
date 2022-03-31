@@ -59,6 +59,7 @@ class LoginFragment : Fragment() {
                             }
                             is Resource.Success -> {
                                 binding.progressBar2.visibility = View.GONE
+                                Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_homeFragment)
                             }
                             is Resource.Error -> {
                                 binding.progressBar2.visibility = View.GONE
@@ -70,6 +71,11 @@ class LoginFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

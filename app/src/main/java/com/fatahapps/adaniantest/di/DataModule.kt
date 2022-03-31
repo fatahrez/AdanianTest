@@ -1,17 +1,24 @@
 package com.fatahapps.adaniantest.di
 
-import com.fatahapps.data.mappers.Mapper
-import com.fatahapps.data.mappers.UserDomainDataMapper
-import com.fatahapps.data.mappers.UserSuccessDomainDataMapper
+import android.app.Application
+import androidx.room.Room
+import com.fatahapps.data.local.Converters
+import com.fatahapps.data.local.EcobbaDatabase
+import com.fatahapps.data.local.models.kweaModels.KweaItemLocal
+import com.fatahapps.data.local.util.GsonParser
+import com.fatahapps.data.mappers.*
 import com.fatahapps.data.remote.EcobbaApi
 import com.fatahapps.data.remote.HttpClient
 import com.fatahapps.data.remote.HttpLogger
 import com.fatahapps.data.remote.dto.UserDTO
 import com.fatahapps.data.remote.dto.UserSuccessDTO
+import com.fatahapps.data.remote.dto.kweaModels.KweaItemDTO
 import com.fatahapps.data.repository.EcobbaRepositoryImpl
+import com.fatahapps.domain.entities.KweaModels.KweaItemEntity
 import com.fatahapps.domain.entities.UserEntity
 import com.fatahapps.domain.entities.UserSuccessEntity
 import com.fatahapps.domain.repository.EcobbaRepository
+import com.google.gson.Gson
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -44,6 +51,16 @@ class DataModule {
         fun bindsUserSuccessMapper(
             userSuccessDomainDataMapper: UserSuccessDomainDataMapper
         ): Mapper<UserSuccessEntity, UserSuccessDTO>
+
+        @Binds
+        fun bindsKweaDomainLocalMapper(
+            kweaDomainLocalMapper: KweaDomainLocalMapper
+        ): Mapper<KweaItemEntity, KweaItemLocal>
+
+        @Binds
+        fun bindsKweaLocalDTOMapper(
+            kweaLocalDTOMapper: KweaLocalDTOMapper
+        ): Mapper<KweaItemLocal, KweaItemDTO>
     }
 
     @Provides
@@ -66,4 +83,22 @@ class DataModule {
             .baseUrl(EcobbaApi.BASE_URL)
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun providesEcobbaDatabase(app: Application): EcobbaDatabase {
+        return Room.databaseBuilder(
+            app,
+            EcobbaDatabase::class.java,
+            "ecobba_db"
+        ).addTypeConverter(Converters(GsonParser(Gson())))
+        .fallbackToDestructiveMigration()
+        .build()
+    }
+
+    @Provides
+    @Singleton
+    fun providesKweasDao(
+        ecobbaDatabase: EcobbaDatabase
+    ) = ecobbaDatabase.dao
 }

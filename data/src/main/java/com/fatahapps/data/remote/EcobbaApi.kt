@@ -2,6 +2,8 @@ package com.fatahapps.data.remote
 
 import com.fatahapps.data.remote.dto.UserDTO
 import com.fatahapps.data.remote.dto.UserSuccessDTO
+import com.fatahapps.data.remote.dto.kweaModels.KweaItemDTO
+import com.fatahapps.data.remote.dto.kweaModels.KweaItemsWrapper
 import retrofit2.http.*
 
 interface EcobbaApi {
@@ -21,5 +23,10 @@ interface EcobbaApi {
         @Field("email") email: String,
         @Field("password") password: String
     ): UserSuccessDTO
+
+    @GET("kwea-items")
+    suspend fun getKweaItems(
+        @Header("Authorization") token: String
+    ): KweaItemsWrapper
 
 }
