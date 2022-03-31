@@ -4,5 +4,6 @@ data class UserSuccessEntity(
     val success: Boolean,
     val message: String,
     val user: UserEntity,
-    val token: String
+    val token: String,
+    val errors: String?
 )

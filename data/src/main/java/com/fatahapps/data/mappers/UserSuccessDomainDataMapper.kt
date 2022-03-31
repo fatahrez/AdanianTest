@@ -19,7 +19,8 @@ class UserSuccessDomainDataMapper @Inject constructor(): Mapper<UserSuccessEntit
                 e.user.passwordConfirmation,
                 e.user.msisdn
             ),
-            token = e.token
+            token = e.token,
+            errors = e.errors
         )
     }
 
@@ -35,7 +36,8 @@ class UserSuccessDomainDataMapper @Inject constructor(): Mapper<UserSuccessEntit
                 t.user.passwordConfirmation,
                 t.user.msisdn
             ),
-            token = t.token
+            token = t.token,
+            errors = t.errors
         )
     }
 }

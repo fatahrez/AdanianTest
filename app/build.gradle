@@ -24,6 +24,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures {
+        viewBinding true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -34,7 +37,10 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     def lifecycle_version = "2.5.0-alpha05"
+    def nav_version = "2.4.1"
+    def preference_version = "1.2.0"
 
     implementation project(':domain')
     implementation project(':data')
@@ -47,13 +53,18 @@ dependencies {
     implementation 'androidx.activity:activity-ktx:1.4.0'
     implementation 'com.google.android.material:material:1.5.0'
 
-
-
     // Retrofit - Networking
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.2"
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
+
+    // Room - Caching
+    implementation "androidx.room:room-runtime:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
+
+    // Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.4.2"
 
     // Kotlin Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
@@ -65,6 +76,9 @@ dependencies {
     // Annotation processor
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
+    // Jetpack Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // Injection for DI
     implementation 'javax.inject:javax.inject:1'
@@ -74,6 +88,13 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:2.38.1"
     kapt "androidx.hilt:hilt-compiler:1.0.0"
     kapt "com.google.dagger:hilt-android-compiler:2.38.1"
+
+    // Kotlin preference
+    implementation "androidx.preference:preference-ktx:$preference_version"
+
+    // Glide - Image loading
+    implementation "io.coil-kt:coil:2.0.0-rc02"
+
 
     testImplementation 'org.mockito:mockito-core:3.8.0'
     testImplementation 'junit:junit:4.13.2'
